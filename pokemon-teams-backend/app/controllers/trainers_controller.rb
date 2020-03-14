@@ -4,6 +4,10 @@ class TrainersController < ApplicationController
     render json: TrainerSerializer.new(trainers)
   end
 
+  def create
+    trainer = Trainer.new(trainer_params)
+  end
+
     # render json: TrainerSerializer.new(@trainers).to_serialized_json
     # render json: trainers.to_json(:include => {
     #   :pokemon => {
@@ -18,5 +22,12 @@ class TrainersController < ApplicationController
     # render json: TrainerSerializer.new(trainer, options).to_serialized_json
   end
 
+  def delete
+    @trainer.destroy
+  end
+
+  def trainer_params
+    params.require(:trainer).permit(:name, :pokemon_nickname, :pokemon_id)
+  end
 
 end
